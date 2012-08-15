@@ -1,0 +1,48 @@
+When I came to Grand Valley State University in late 2010, they were already trying to find a solution to the increased mobile usage of their website. That year, the GVSU Library website traffic from mobile devices was a measley .5% of all visits, while the University as a whole saw traffic from mobile devices reach 4.5% of all visits. Now just 18 months later, GVSU's library has a tenfold increase in mobile traffic. Visits from mobile devices for the first 6 months of this year hit 4.95%. That's 1 in every 20 visitors to our website using a mobile device. This growth is only continuing.
+
+Most of the discussion about providing access to our services for mobile users centered around the most common practice at the time: detecting a user's device or browser and serving up a different, "stripped-down" version of the lbrary website to mobile devices. Libraries thus find themselves supporting two websites: the "mobile" website and the "desktop" website. (Some even support a separate "iPhone" website.) The effect is to create the perception of two different "Webs", the "Mobile Web," where efficiency rules, and the "Desktop Web," which is what everyone thinks of as the Web.
+
+But this is just a perception. "There is no Mobile Web," Stephen Hay wrote. "There is only The Web, which we view in different ways."[http://www.the-haystack.com/2011/01/07/there-is-no-mobile-web/] By cordoning off mobile devices into a ghettoized "Mobile Web," we convinced ourselves that people using the Web on mobile devices were doing something very different than those using the "Desktop" web. We made a lot of assumptions about our users, in other words.
+
+In the early ninties, a teenager like Zach Morris on Saved By the Bell using a cell phone was a punch line in a sitcom. Mobile phones were for busy professionals who were on the go and didn't have time to wait around for calls. They certainly weren't going to be someone's primary communications tool. Twenty years later, we are on track to have more activated mobile devices than people on the planet[http://web.worldbank.org/WBSITE/EXTERNAL/TOPICS/EXTINFORMATIONANDCOMMUNICATIONANDTECHNOLOGIES/0,,contentMDK:23190786~pagePK:210058~piPK:210062~theSitePK:282823,00.html]. 88% of Americans own a cell phone, and nearly half of those are smartphones.[http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx] A whopping 77% of teens age 12-17 have a cellphone, and 25% of those are smartphones.[http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx] Mobile phones are no longer a business tool for the distracted professional. They are a lifestyle tool for everyone.
+
+But the myth of the Mobile web stil encourages us to think about mobile web use as occassional use by distracted people who are on the go on a slow network. But the data shows a more complicated picture of how people use the web on mobile devices. According to a 2012 Pew Internet report, 17% of cell phone owners connect to the web primarily or only through their phone, while 45% of 18-29 year-old who browse the web on their phone use the phone as their primary device. [http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx]  
+
+How we use our phones is different in reality as well. TK% of smartphone owners browse the web on a mobile device while home, TK% while waiting in line or during miscellaneous downtimes[SOURCE], and TK% even admit to using them in the bathroom[SOURCE]. The thing is, phones are increasingly becoming a go-to web browsing device. As libraries who strive to provide access everyone, making our services available on mobile devices is a must. Clearly we need a way out of the myth of the Mobile Web.
+
+But we might still make use of device and browser detection without falling into the trap of the "Mobile Web," couldn't we? Perhaps, but there are other technical challenges with these methods that will be difficult to overcome. First, with countless smartphone models released every week, keeping up with such a device or browser library is unsustainable, especially for the small, perpetually understaffed library web team. In addition, this requires our small teams (or more likely, individuals) to maintain two (or three) separate code bases, even if each site offers complete functionality. 
+
+Perhaps the most frustrating problem with this method affect users. By redirecting to a mobile version of the website, we generate multiple URLs for the same content. If a user visits our site on a mobile device to read an article and is redirected to http://m.oursite.com/article, then when they share that URL with others, everyone will be directed to the mobile version of the page. This can be frustrating to users on desktop computers, who often get a site formatted for a very different screen. Even worse, if we dont offer all of our site's functionality to the mobile site, then users on "desktop" computers find themseleves equally unable to 
+
+But these methods are unsustainable, with countless new smartphone models released every week. In addition, there is performance to consider when using this method, since users will need to load the device library and code to detect devices and then potentially be redirected to a new site which then starts loading from sratch. Since users on mobile devices expect sites to load faster than on more powerful desktop computers[SOURCE], this is a losing proposition. 
+
+
+Existing solutions: separate sites. Create the ghetto of the mobile web. That's unscalable.
+Why was this the default? Because we're still stuck in print thinking.
+John Allsopp.
+Enter Responsive Web Design.
+3 Parts of RWD.
+Instead of locking yourself to individual devices, you are designing for ranges of screen sizes, or device capabilities. It's a scalable approach for a field like librarianship with limited budgets.
+RWD at GVSU
+Goals for the site: usable on any device, attractive (and maybe fun) on more capable devices
+Challenge: library website was not a cohesive site. Code base largely dictated by outside influences: hosted vendor sites (Summon, 360 Link, EZProxy login, Illiad, Ares), campus CMS (custom), library=specific tools (Library Labs, Instruction Menu) - make them all look and work uniformly on all devices. With no budget and just me.
+First step: test the waters of the CMS
+Build the Mary I promotional site inside the CMS to see what can be done. 
+	Challenges: default non-responsive styles from campus. 2 approaches: overwrite AND remove with JS - other people's templates
+	Benefits: small, contained, targeted site with single code base.
+* Navigation patterns
+Thinking big: Campus moves to responsive design
+Waiting.
+Now only CMS content needs to use our styles: template is already responsive!
+Challenges: tables, consitency
+* Designing a flexible grid system
+* RWD patterns for tables
+Vendor websites
+Challenges: unlikely to convince a vendor to move in this direction
+* Vendors that give you nearly complete control (Illiad)
+* Vendors that give you some access to branding but use tables for layout: do your best and then employ javascript to enhance capable devices  (360Link Reset)
+* Vendors that don't give you much control
+* Vendors that do device or browser detection that you can't control (Summon, LibGuides)
+* The response: library website hasn't been live long enough to get quantitative data, but in my experience there is no a-ha moment: this is what your users expect. No one pats you on the back when you meet basic expectations.
+
+	
