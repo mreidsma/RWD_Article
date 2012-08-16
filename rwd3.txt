@@ -32,20 +32,40 @@ In early 2010, Ethan Marcotte, a web designer from Boston, coined the name "Resp
 
 When CSS3 came out, the existing media attribute for stylesheets was expanded. Whereas in CSS 2.1 you could declare stylesheets for screen, print, and even handheld, with CSS 3 granular attribute detection was added. Now you could serve up CSS to a screen that met certain width criteria, or was held in landscape, or even resolutions and aspect ratios. [http://www.w3.org/TR/css3-mediaqueries/] Since the techniques of determining devices and browsers were essentially trying to determine what size the screen of the device viewing the website was to serve up the optimal format, CSS width media queries were a perfect way to solve this problem without getting stuck in a race to keep up with browser versions or device models.
 
-Media queries are added as attributes to link elements or CSS @import statements, like the media attributes before them. For instance, here's a stylesheet that will load only if the device has a screen and the browser width is at least 600 pixels:
+Media queries are added as attributes to link elements, CSS @import statements, or inline stylesheets as conditionals like the media attributes before them. For instance, here's a stylesheet that will load only if the device has a screen and the browser width is at least 600 pixels, shown in three equivalent declarations:
 
-`<link rel="styleheet" type="text/css" href="styles.css" media="screen and (min-width:600px)" />`
+	<link rel="styleheet" type="text/css" href="styles.css" media="screen and (min-width:600px)" />
+	@import TK
+
+Or inside a stylesheet:
+
+	@media screen and (min-width:600px) {
+		/* Awesome styles here */
+	}
+
+This gives us a lot of flexibility on loading size-specific CSS, since we can target screen widths which will help capture a wide range of devices. But there are a few best practices we should keep in mind when writing media queries.
+
+First, don't use pixel values for your media queries; use ems. Rather than being a fixed width measurement, ems are a relative measure that allows for user zooming without making our sites unusable. Unless you change the default body font-size in your style sheet, you can assume that by default 1em = 16 pixels. So for our previous example, instead of calling the stylesheet at 600pixels, we'll call it at 600 pixels / 16 pixels = 37.5ems. So our query would read:
+	
+	@media screen and (min-width: 37.5em) {
+		/* Awesome styles here */
+	}
+
+Now when a user activates their browser's zoom feature, our media queries will activate based on the relative widths of the elements, or when the break points actually fail, rather than on specific widths which could activate media queries based on pixels as the browser effectively reduces pixel density of the display.
+
+Second, write all of your media queries in a single stylesheet instead of loading separate stylesheets for each query. This reduces load times since you are only doing a single server call for your CSS instead of several.
+
+## RWD at GVSU: 
+
+When we started talking about implementing RWD at GVSU, we had a few core goals for the new site. First, it had to work and be usable on any device, from an 8-year-old flip phone with a bare-bones web browser to the latest tablets and laptops our students and faculty were increasingly using. We wanted a single code base based on Web standards, since our Web services staff is just me and one part-time student. We wanted it to be attractive and maybe even fun to use, and we wanted to take advantage of the capabilities of newer devices without leaving older phones and computers from accessing our services.
+
+In addition, we wanted all of our disparate sites that are spread across different vendors to appear to be a cohesive website. With no budget, and just me making changes.
+
+Some of our goals had to be revised, since we immediately encountered some challenges that were out of our control. Like most libraries, we rely on hosted vendor projects for many of our services. As such, having a single code base was not technically possible, since many of our customizations would need to be spread over a variety of proprietary hosted interfaces that offered differing levels of customization. However, we decided to start with the campus CMS pages, since the University's website design would determine the overall look of our template. In addition, we work closely with our University's web team and had the most flexibility on making design changes.
+
+Our first step was to implement RWD techniques on a smaller sub-website within the library to see what challenges would pop up working within the University's framework. In the spring of 2011 I started work redesigning the website for our new library usng responsive principles. [Figure]
 
 
-
-## RWD at GVSU
-
-Existing solutions: separate sites. Create the ghetto of the mobile web. That's unscalable.
-Why was this the default? Because we're still stuck in print thinking.
-John Allsopp. Assumptions about browsers, 
-Enter Responsive Web Design.
-3 Parts of RWD.
-Instead of locking yourself to individual devices, you are designing for ranges of screen sizes, or device capabilities. It's a scalable approach for a field like librarianship with limited budgets.
 RWD at GVSU
 Goals for the site: usable on any device, attractive (and maybe fun) on more capable devices
 Challenge: library website was not a cohesive site. Code base largely dictated by outside influences: hosted vendor sites (Summon, 360 Link, EZProxy login, Illiad, Ares), campus CMS (custom), library=specific tools (Library Labs, Instruction Menu) - make them all look and work uniformly on all devices. With no budget and just me.
