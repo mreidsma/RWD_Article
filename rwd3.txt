@@ -6,8 +6,6 @@ But this is just a perception. "There is no Mobile Web," Stephen Hay wrote. "The
 
 Web design has always been a little stuck in awe of the traditions of print. For many years, we web designers relied on tables to create layouts and controlled and sophisticated as print brochures. We clamored for control, and fought to have our sites look the same in every browser. But what we missed in all of this was that the fluidity and lack of control the Web offers the designer is not a bug; rather, it is a feature. As John Allsopp wrote twelve years ago," The control which designers know in the print medium, and often desire in the web medium, is simply a function of the limitation of the printed page. We should embrace the fact that the web doesn’t have the same constraints, and design for this flexibility." [http://www.alistapart.com/articles/dao/]
 
-Because we couldn't replicate the exact look of our "desktop" layouts on mobile devices, we wanted 
-
 We made assumptions about mobile devices, as well. In the early ninties, a teenager like Zach Morris on Saved By the Bell using a cell phone was a punch line in a sitcom. Mobile phones were for busy professionals who were on the go and didn't have time to wait around for calls. They certainly weren't going to be someone's primary communications tool. Twenty years later, we are on track to have more activated mobile devices than people on the planet[http://web.worldbank.org/WBSITE/EXTERNAL/TOPICS/EXTINFORMATIONANDCOMMUNICATIONANDTECHNOLOGIES/0,,contentMDK:23190786~pagePK:210058~piPK:210062~theSitePK:282823,00.html]. 88% of Americans own a cell phone, and nearly half of those are smartphones.[http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx] A whopping 77% of teens age 12-17 have a cellphone, and 25% of those are smartphones.[http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx] Mobile phones are no longer a business tool for the distracted professional. They are a lifestyle tool for everyone.
 
 But the myth of the Mobile web still encourages us to think about mobile web use as occasional use by distracted people who are on the go on a slow network. These assumptions about users are entrenched. But the data shows a more complicated picture of how people use the web on mobile devices. According to a 2012 Pew Internet report, 17% of cell phone owners connect to the web primarily or only through their phone, while 45% of 18-29 year-old who browse the web on their phone use the phone as their primary device. [http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx]  
@@ -18,14 +16,33 @@ But we might still make use of device and browser detection without falling into
 
 Perhaps the most frustrating problem with this method affect users. By redirecting to a mobile version of the website, we generate multiple URLs for the same content. If a user visits our site on a mobile device to read an article and is redirected to http://m.oursite.com/article, then when they share that URL with others, everyone will be directed to the mobile version of the page. This can be frustrating to users on desktop computers, who often get a site formatted for a very different screen. Even worse, if we don't offer all of our site's functionality to the mobile site, then users on "desktop" computers find themseleves equally unable to perform tasks that were deemed unnecessary on a mobile site.
 
-But more challenges are ahead. Many popular video game consoles available today offer robust web browsers, and SmartTVs are becoming more and more affordable. What happens when you have to maintain a mobile, a desktop, and a widescreen TV website? What about the next device that comes along that 
+But more challenges are ahead. Many popular video game consoles available today offer robust web browsers, and SmartTVs are becoming more and more affordable. What happens when you have to maintain a mobile, a desktop, and a widescreen TV website? What about the next device that comes along that changes our assumptions about how people use the web?
 
-Besides, there is an easier way. We can maintain a single code base, making life easier for both our employees and our users, while still providing an optimal experience for any range of devices.
+There is an easier way to build sites for existing and future devices. We can maintain a single code base, making life easier for both our employees and our users, while still providing an optimal experience for any range of devices. And best of all, we can do it using good old Web standards.
 
+## Responsive Web Design
+
+In early 2010, Ethan Marcotte, a web designer from Boston, coined the name "Responsive Web Design" to refer to a suite of design techniques for building fluid, adaptive websites that respond to the device they are viewed on. By designing sites with fluid grids, using flexible images, and employing new CSS media queries, Marcotte was able to build websites that scaled beautifully on any screen size. 
+
+### Fluid Grids
+
+### Flexible Images
+
+### Media Queries
+
+When CSS3 came out, the existing media attribute for stylesheets was expanded. Whereas in CSS 2.1 you could declare stylesheets for screen, print, and even handheld, with CSS 3 granular attribute detection was added. Now you could serve up CSS to a screen that met certain width criteria, or was held in landscape, or even resolutions and aspect ratios. [http://www.w3.org/TR/css3-mediaqueries/] Since the techniques of determining devices and browsers were essentially trying to determine what size the screen of the device viewing the website was to serve up the optimal format, CSS width media queries were a perfect way to solve this problem without getting stuck in a race to keep up with browser versions or device models.
+
+Media queries are added as attributes to link elements or CSS @import statements, like the media attributes before them. For instance, here's a stylesheet that will load only if the device has a screen and the browser width is at least 600 pixels:
+
+`<link rel="styleheet" type="text/css" href="styles.css" media="screen and (min-width:600px)" />`
+
+
+
+## RWD at GVSU
 
 Existing solutions: separate sites. Create the ghetto of the mobile web. That's unscalable.
 Why was this the default? Because we're still stuck in print thinking.
-John Allsopp.
+John Allsopp. Assumptions about browsers, 
 Enter Responsive Web Design.
 3 Parts of RWD.
 Instead of locking yourself to individual devices, you are designing for ranges of screen sizes, or device capabilities. It's a scalable approach for a field like librarianship with limited budgets.
@@ -40,9 +57,11 @@ Build the Mary I promotional site inside the CMS to see what can be done.
 Thinking big: Campus moves to responsive design
 Waiting.
 Now only CMS content needs to use our styles: template is already responsive!
-Challenges: tables, consitency
+Challenges: content, tables, consitency
+* Your website has too much crap.
 * Designing a flexible grid system
 * RWD patterns for tables
+
 Vendor websites
 Challenges: unlikely to convince a vendor to move in this direction
 * Vendors that give you nearly complete control (Illiad)
