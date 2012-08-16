@@ -6,9 +6,9 @@ But this is just a perception. "There is no Mobile Web," Stephen Hay wrote. "The
 
 Web design has always been a little stuck in awe of the traditions of print. For many years, we web designers relied on tables to create layouts and controlled and sophisticated as print brochures. We clamored for control, and fought to have our sites look the same in every browser. But what we missed in all of this was that the fluidity and lack of control the Web offers the designer is not a bug; rather, it is a feature. As John Allsopp wrote twelve years ago," The control which designers know in the print medium, and often desire in the web medium, is simply a function of the limitation of the printed page. We should embrace the fact that the web doesn’t have the same constraints, and design for this flexibility.[^Allsopp]"
 
-We made assumptions about mobile devices, as well. In the early ninties, a teenager like Zach Morris on Saved By the Bell using a cell phone was a punch line in a sitcom. Mobile phones were for busy professionals who were on the go and didn't have time to wait around for calls. They certainly weren't going to be someone's primary communications tool. Twenty years later, we are on track to have more activated mobile devices than people on the planet[http://web.worldbank.org/WBSITE/EXTERNAL/TOPICS/EXTINFORMATIONANDCOMMUNICATIONANDTECHNOLOGIES/0,,contentMDK:23190786~pagePK:210058~piPK:210062~theSitePK:282823,00.html]. 88% of Americans own a cell phone, and nearly half of those are smartphones.[http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx] A whopping 77% of teens age 12-17 have a cellphone, and 25% of those are smartphones.[http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx] Mobile phones are no longer a business tool for the distracted professional. They are a lifestyle tool for everyone.
+We made assumptions about mobile devices, as well. In the early ninties, a teenager like Zach Morris on Saved By the Bell using a cell phone was a punch line in a sitcom. Mobile phones were for busy professionals who were on the go and didn't have time to wait around for calls. They certainly weren't going to be someone's primary communications tool. Twenty years later, we are on track to have more activated mobile devices than people on the planet[^Worldbank]. 88% of Americans own a cell phone, and nearly half of those are smartphones.[^PewGadgets] A whopping 77% of teens age 12-17 have a cellphone, and 25% of those are smartphones.[^PewTeens] Mobile phones are no longer a business tool for the distracted professional. They are a lifestyle tool for everyone.
 
-But the myth of the Mobile web still encourages us to think about mobile web use as occasional use by distracted people who are on the go on a slow network. These assumptions about users are entrenched. But the data shows a more complicated picture of how people use the web on mobile devices. According to a 2012 Pew Internet report, 17% of cell phone owners connect to the web primarily or only through their phone, while 45% of 18-29 year-old who browse the web on their phone use the phone as their primary device. [http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx]  
+But the myth of the Mobile web still encourages us to think about mobile web use as occasional use by distracted people who are on the go on a slow network. These assumptions about users are entrenched. But the data shows a more complicated picture of how people use the web on mobile devices. According to a 2012 Pew Internet report, 17% of cell phone owners connect to the web primarily or only through their phone, while 45% of 18-29 year-old who browse the web on their phone use the phone as their primary device[^PewCellUse].  
 
 How we use our phones is different in reality as well. TK% of smartphone owners browse the web on a mobile device while home, TK% while waiting in line or during miscellaneous downtimes[SOURCE], and TK% even admit to using them in the bathroom[SOURCE]. The thing is, phones are increasingly becoming a go-to web browsing device. As libraries who strive to provide access everyone, making our services available on mobile devices is a must. Clearly we need a way out of the myth of the Mobile Web.
 
@@ -22,7 +22,7 @@ There is an easier way to build sites for existing and future devices. We can ma
 
 ## Responsive Web Design
 
-In early 2010, Ethan Marcotte, a web designer from Boston, coined the name "Responsive Web Design" to refer to a suite of design techniques for building fluid, adaptive websites that respond to the device they are viewed on. By designing sites with fluid grids, using flexible images, and employing new CSS media queries, Marcotte was able to build websites that scaled beautifully on any screen size. 
+In early 2010, Ethan Marcotte, a web designer from Boston, coined the name "Responsive Web Design" to refer to a suite of design techniques for building fluid, adaptive websites that respond to the device they are viewed on[^ALARWD]. By designing sites with fluid grids, using flexible images, and employing new CSS media queries, Marcotte was able to build websites that scaled beautifully on any screen size. 
 
 ### Fluid Grids
 
@@ -30,7 +30,7 @@ In early 2010, Ethan Marcotte, a web designer from Boston, coined the name "Resp
 
 ### Media Queries
 
-When CSS3 came out, the existing media attribute for stylesheets was expanded. Whereas in CSS 2.1 you could declare stylesheets for screen, print, and even handheld, with CSS 3 granular attribute detection was added. Now you could serve up CSS to a screen that met certain width criteria, or was held in landscape, or even resolutions and aspect ratios. [http://www.w3.org/TR/css3-mediaqueries/] Since the techniques of determining devices and browsers were essentially trying to determine what size the screen of the device viewing the website was to serve up the optimal format, CSS width media queries were a perfect way to solve this problem without getting stuck in a race to keep up with browser versions or device models.
+When CSS3 came out, the existing media attribute for stylesheets was expanded. Whereas in CSS 2.1 you could declare stylesheets for screen, print, and even handheld, with CSS 3 granular attribute detection was added. Now you could serve up CSS to a screen that met certain width criteria, or was held in landscape, or even resolutions and aspect ratios[^W3CMediaQueries]. Since the techniques of determining devices and browsers were essentially trying to determine what size the screen of the device viewing the website was to serve up the optimal format, CSS width media queries were a perfect way to solve this problem without getting stuck in a race to keep up with browser versions or device models.
 
 Media queries are added as attributes to link elements, CSS @import statements, or inline stylesheets as conditionals like the media attributes before them. For instance, here's a stylesheet that will load only if the device has a screen and the browser width is at least 600 pixels, shown in three equivalent declarations:
 
@@ -95,8 +95,31 @@ One problem, however, is how to let mobile users know that the navigation has mo
 
 	... Navigation goes here
 
-For small screens 	
+For small screens we can style the link appropriately and then hide it on wider screens when the navigation is at the top. In our case, I wanted hide the text and use the same icon our campus used for their responsive homepage. I hid the text by moving it far off the screen an used a CSS background image. While you could use an image in the markup instead of the text, this would not be as useful for less capable seizes where CSS was not available or for screen readers that rely on text to help visually impaired users navigate websites. The CSS looks like this:
 
+	#gvsu-library_menu {
+		background: transparent url(img/menu.png) top left no-repeat;
+		text-indent: -9999px;
+	}
+
+	#navigation {
+		float: none;
+		width: 100%;
+	}
+
+	@media screen and (min-width: 48em) {
+		
+		#gvsu-library_menu {
+			display: none;
+		}
+
+		#navigation {
+			float: right;
+			width: 22%;
+		}
+
+
+This solution is simple and relies only on 
 
 
 
@@ -138,7 +161,21 @@ FOOTNOTE: 1. Firstname Lastname, “Title of Web Page,” Publishing Organizatio
 
 REFERENCE: Lastname, Firstname. “Title of Web Page.” Publishing Organization or Name of Website in Italics. Publication date and/or access date if available. URL.
 
+Horrigan, John. A Typology of Information and Communication Technology Users. Pew Internet & American Life Project, May 6, 2007, http://www.pewinternet.org/PPF/r/213/report_display.asp, accessed on May 10, 2007.
+
 [^haymobileweb]: Hay, Stephen, "There is No Mobile Web," *The Haystack*, January 7, 2011, accessed on August 16, 2012, [http://www.the-haystack.com/2011/01/07/there-is-no-mobile-web/](http://www.the-haystack.com/2011/01/07/there-is-no-mobile-web/)
 
 [^Allsopp]: Allsopp, John, "The Dao of Web Design," *A List Apart*, April 7, 2000, accessed August 16, 2012, [http://www.alistapart.com/articles/dao/](http://www.alistapart.com/articles/dao/)
+
+[^Worldbank]: "Information and Communications for Development 2012: Maximizing Mobile," *The World Bank*, acessed August 16, 2012, [http://www.worldbank.org/ict/IC4D2012](http://www.worldbank.org/ict/IC4D2012)
+
+[^PewGadgets]: "A Closer Look at Gadget Ownership," *Pew Internet & American Life Project*, June 28, 2012, accessed August 16, 2012, [http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx](http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx)
+
+[^PewTeens]: Lenhart, Amanda, "Teens, Smartphones & Texting," *Pew Internet & American Life Project*, March 19, 2012, access August 16, 2012, [http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx](http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx)
+
+[^PewCellUse]: Smith, Aaron, "Cell Internet Use 2012," *Pew Internet & American Life Project*, June 26, 2012, accessed August 16, 2012, [http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx](http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx)
+
+[^ALARWD]: Marcotte, Ethan, "Responsive Web Design," *A List Apart*, May 25, 2010, accessed August 16, 2012, [http://www.alistapart.com/articles/responsive-web-design/](http://www.alistapart.com/articles/responsive-web-design/)
+
+[^W3CMediaQueries]: "Media Queries," *W3C*, June 19, 2012, accessed Agust 16, 2012, [http://www.w3.org/TR/css3-mediaqueries/](http://www.w3.org/TR/css3-mediaqueries/)
 	
