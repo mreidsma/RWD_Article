@@ -63,7 +63,39 @@ In addition, we wanted all of our disparate sites that are spread across differe
 
 Some of our goals had to be revised, since we immediately encountered some challenges that were out of our control. Like most libraries, we rely on hosted vendor projects for many of our services. As such, having a single code base was not technically possible, since many of our customizations would need to be spread over a variety of proprietary hosted interfaces that offered differing levels of customization. However, we decided to start with the campus CMS pages, since the University's website design would determine the overall look of our template. In addition, we work closely with our University's web team and had the most flexibility on making design changes.
 
-Our first step was to implement RWD techniques on a smaller sub-website within the library to see what challenges would pop up working within the University's framework. In the spring of 2011 I started work redesigning the website for our new library usng responsive principles. [Figure]
+Our first step was to implement RWD techniques on a smaller sub-website within the library to see what challenges would pop up working within the University's framework. In the spring of 2011 I started work redesigning the website for our new library usng responsive principles. [Figure] In some ways, this site was the antithesis of a library website. At only 7 pages, it was small, and it lacked many of the features we expect from typical library sites: namely, search boxes and long lists of resources. Nevertheless, I knew that many of the issues we would face in adapting a CMS site to RWD would be universal.
+
+Our existing template used tables to structure much of the site's layout, and so I modified the template to finally move to an all-CSS layout using divs. Our webteam then loaded the library-specific CSS file after the campus-wide styles so that my styles would overwrite the existing, fixed-layout styles. For the most part this worked, although I later ran into a few issues where the base stylesheet continued to interfere with my new styles. 
+
+### Progressive Enhancement and "Mobile First"
+
+Since most websites are built making assumptions about a user's browser window size, it's no surprise that many other assumptions are made about the user's device that can lead to frustration for users with less capable devices. As libraries, we wouldn't ever think of removing a handicap ramp to access our buildings because "no one in a wheelchair comes here" or "fewer than 1% of our visitors use the ramp." Our mission is to provide the same services to all of our users, regardless of how they come to us.
+
+Yet this same inclusiveness falls away when libraries build their websites. Important considerations like HTML source order, accessibility features, and javascript fall-backs are ofte ignored simply because "not many" or "no one" is assumed to make use of them. But by overlooking these methods, we're going to shut out some users from our online services while making our jobs of building a responsive library website harder. Let me explain.
+
+#### Source Order
+
+The order that your HTML is presented to the user is important. In most websites designed for desktop, the source order goes something like this:  heading, navigation, content, footer. This is a pretty typical order, because on desktop sites we expect the navigation to be near the top of the page or along the left side. But when we load such a site without CSS, we are presented with a list of navigation items to other pages before we ever get to the content. Yet no one comes to your website for the navigation: they come for the content. 
+
+When we moved from table-based layouts to CSS, we thought that by simply keeping our style attributes separate from our HTML we were separating style from structure. But we continued to put the navigation at the top of our document structure since that's where we expected it to appear on the page. By moving navigation below our content, we can improve the experience less-capable devices have visiting our sites and use CSS to progressively enhance the site for devices that have CSS capable browsers. When coupled with media queries, we can easily move the navigation visually to the top of the page with CSS. 
+
+### Navigation patterns
+
+This was one of the first issues I had to address with our site: where would the navigation live, and how would it look on different screen sizes? I was able to convince our University web team to move the navigation below the content, which was the opposite of the existing template. But I was able to keep the existing look of the left-side navigation on large screens by floating the content and navigation right instead of the default left. 
+
+That means that on small screens, I don't have to do much at all to change the navigation. I want it to fall below the content, which it already does in the source order, so I simply need to style it. In our case, I made the decision to use the existing CMS template navigation styles since our users are accustomed to them on GVSU websites and I
+
+
+
+
+ 
+
+JavaScript has gotten a bad rap over the past decade, but it's an important tool for building and customizing sophisticated front-end experiences for our users. One of the main reasons it has gotten such a bad rap in the past is 
+
+
+## Thinking big: campus-wide RWD
+
+## GVSU Library website goes responsive
 
 
 RWD at GVSU
