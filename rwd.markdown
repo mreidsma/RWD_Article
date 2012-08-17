@@ -269,7 +269,7 @@ Now I have a basic responsive website that adapts its layout to the size of the 
 
 While media queries enjoy great support in modern browsers, Internet Explorer 8 and earlier don't support them. If you build your styles like I do and start with your mobile styles and then add styles for larger screens with min-width queries, Internet Explorer will simply load the styles for small screens. If you're an academic librarian like me, you have a campus full of computers from George W. Bush's first term running ancient versions of Internet Explorer, so simply leaving this large group of users with small-screen styles on large screens isn't an option. But there are a few solutions to get Internet Explorer to behave.
 
-First, there are several JavaScript polyfills that will patch browsers that don't support media queries. Scott Jehl's Respond.js is the most lightweight, weighing in at only 1k, and it works very well if you have a single stylesheet. You can find the source code at [http://github.com/scottjehl/Respond](http://github.com/scottjehl/Respond). If you can't use JavaScript, you could restructure your media queries to begin with your wie screen styles, and then use max-width: media queries to scale the site down to smaller screens. IE will ignore all of the styles in media queries, so will only load the initial styles for wide screens. This is the approach our campus uses, but it makes me uncomfortable. Less capable devices that support CSS but not media queries will get served a "desktop" website instead of a basic, small-screen optimized site. In my experience, scaling down from a desktop site also makes for more CSS.
+First, there are several JavaScript polyfills that will patch browsers that don't support media queries. Scott Jehl's Respond.js is the most lightweight, weighing in at only 1k, and it works very well if you have a single stylesheet. You can find the source code at [http://github.com/scottjehl/Respond](http://github.com/scottjehl/Respond). If you can't use JavaScript, you could restructure your media queries to begin with your wide screen styles, and then use max-width: media queries to scale the site down to smaller screens. IE will ignore all of the styles in media queries, so will only load the initial styles for wide screens. This is the approach our campus uses, but it makes me uncomfortable. Less capable devices that support CSS but not media queries will get served a "desktop" website instead of a basic, small-screen optimized site. In my experience, scaling down from a desktop site also makes for more CSS.
 
 The solution I chose was to create an IE-specific stylesheet that loads after your media queries, passing all of the wide-screen styles to early versions of Internet Explorer. That would look something like this:
 
@@ -277,10 +277,22 @@ The solution I chose was to create an IE-specific stylesheet that loads after yo
 		<link rel="stylesheet" type="text/css" href="ie.css" />
 	<![endif]-->
 
-Since respond.js conflicted with some aspects of our campus CMS, this was the solution I took for the library website. IE users still won't get a responsive site, but users will less-capable mobile devices won't get a site styled for desktop, either.
+Since respond.js conflicted with some aspects of our campus CMS, this was the solution I took for the library website. IE users still won't get a responsive site, but users will less-capable mobile devices will get a site styled for mobile.
 
 ### Flexible Images
 
+The last element of responsive web design is flexible images. Since our website (and most library websites, I'd say) are not image-heavy, making our images adapt to their containers is fairly easy for us. To make images (and other media elements) responsive, we can add a one line to our CSS:
+
+	img,
+	video,
+	object,
+	embed {
+		max-width: 100%;
+	}
+
+Now our images will never be larger than their containing elements. As the containers scale down, so will the images. Of course, if you are supporting Internet Explorer 6 and below, you'll have to use width: 100% in a stylesheet for IE 6 and below, since support for max-width wasn't added unit version 7.
+
+Of course, responsive images are important, and a big topic of debate. If you are building a digital library with scanned images or your site uses a lot of large image files, you probably don't want to resort to scaling down 1000 pixel-wide images to fit on phone screens. There are several solutions under discussion for how to serve up different images to devices based on screen sizes, but none of them have been implemented by browser makers yet. If you need to serve up a lot of images, I recommend looking at Scott Jehl's Picturefill ([https://github.com/scottjehl/picturefill](https://github.com/scottjehl/picturefill)), which replicates one of the proposed solutions in JavaScript. 
 
 ## Further Challenges
 
