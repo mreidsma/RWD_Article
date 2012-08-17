@@ -22,60 +22,213 @@ I developed a few core goals for the new site. First, all content and services w
 
 I also wanted to take advantage of the capabilities of newer devices without leaving older devices or assistive technologies like screen readers from using our services. So I would build the site with clean, standards-based HTML and then enhance the site with CSS and JavaScript on more capable devices as much as possible. Like most libraries, we rely on many hosted vendor products to provide services to our patrons, so I wasn't in charge of much of the code being served to our patrons. Even though each vendor offered different levels of customization possibilities, I wanted all our disparate sites to appear to be a single, cohesive website. 
 
-I undertook this project with no budget and a team of one (me). But I didn't need a team of designers or developers to achieve my goals, since there was a technique ready-made to help me build the kind of site we wanted for our library: Responsive Web Design.
+I undertook this project with no budget and a team of one (me). It took about a week.
 
 ## Responsive Web Design
 
-In 2010, Ethan Marcotte coined the name "Responsive Web Design" to describe a suite of techniques for building sites that adapt to the conditions of the user. For instance, by polling the user's device for the size of its screen and adapting the layout accordingly, Marcotte was able to build beautiful, fluid sites that looked good on any device or window size. The techniques themselves are simple. To build a responsive site you need a design based on a flexible grid, adaptable images, and CSS3 media queries. In addition, you need to let go of the need for the kind of control you thought you had building fixed-width sites and embrace the fluidity of the web.
+In my work with clients I had already embraced 
 
-Library websites are generally complex, sprawling things, and ours at Grand Valley is no exception. Because of this, our site doesn't work well as an example for the basics of Responsive Web Design. So before we get to how I made GVSU's library site responsive and some of the challenges libraries face, I'll walk you through the basic techniques on another site I built for the non-existent Library or Librarian (LOL) Library. You can follow along on the web at [http://lollibrary.org](http://lollibrary.org).
+### Mobile First
 
-### Fluid Grids
+In the past, I started all of my Web design projects in Photoshop or the browser, putting together mockups of a site that would be a fixed, desktop width. But because a larger percentage of my own personal browsing is done on a mobile device, I've started thinking differently about how I struture and build websites. Rather than starting with a vision of the site on a large screen and then stripping away features or styles as the screen size drops, I now start with the smallest screen as my base and then add styles to change the layout for devices with wider screens. 
 
-### Flexible Images
+And this doesn't just affect how I write CSS. The order that your HTML is presented to the user is important. In most websites designed for desktop, the source order goes something like this:  heading, navigation, content, footer. This is a pretty typical order, because on desktop sites we expect the navigation to be near the top of the page or along the left side. But when we load such a site without CSS, we are presented with a list of navigation items to other pages before we ever get to the content. Yet no one comes to your website for the navigation: they come for the content. 
+
+When we moved from table-based layouts to CSS, we thought that by simply keeping our style attributes separate from our HTML we were separating style from structure. But we continued to put the navigation at the top of our document structure since that's where we expected it to appear on the page. By moving navigation below our content, we can improve the experience less-capable and assistive devices have visiting our sites and use CSS to progressively enhance the site for devices that have CSS capable browsers. In fact, Marcotte has recently been proposing that Web designers think of layout itself as an enhancement (Wroblewski 2012).
+
+So began with an HTML source order that looked like this: heading, library search, content, navigation, footer. This document structure now presented our content in the order it was used by our patrons. Most visits result in a search of our single search box. After that, people want to access our content. And finally, they want to find other pages on our site.
+
+To begin work on the CSS for the GVSU University Libraries website, then, did a lot of drawing on paper. Photoshop was great for building static, fixed-width mockups, but I find that paper is a better tool for capturing the fluid nature of I shrunk my browser window to as narrow as it would go and started making changes to the CSS. I find that getting my ideas into working code as fast as possible using actual site content works better than playing with static mockups. You can follow along on the live site at [http://gvsu.edu/library](http://gvsu.edu/library). If you don't have a mobile device, make your browser window as narrow to simulate a small-screen device.
+
+At assist with the rapid development of new projects, I created a User Interface Pattern Library, which is essentially a CSS library that gives me a head start on the common design patterns we use throughout our Web projects. By including these styles, I no longer had to worry about styling typography or lists. You can see our reference document or grab the code for our pattern library at [http://gvsu.edu/library/ui](http://gvsu.edu/library/ui). 
+
+Since I'm working initially with a narrow screen, I treat each chunk of content as a block element, and not much needed to be done outside of typography and list styles. However, navigation posed some special challenges. I had moved the navigation below the content, but to get to it mobile users have to scroll to the bottom of the page. I needed a way to give users who needed to get right to the navigation a quick way to access it without interfering with the content of the page. The simple solution we are using for now is to add an anchor link in the markup after the header that jumps the user down to navigation. The markup looks like this:
+
+	<div id="gvsu-library_menu"><a href="#navigation">Menu</a></div>
+
+	...
+
+	<div id="navigation">
+		<ul>
+		...
+
+In the end, I wanted to style the link to match the navigation icon used by our campus homepage. But I prefer not to use an image in the markup as a link, even with alt and titles tags. So I used the text, "Menu" for less-capable devices and then hid it from view and used a CSS background image for the navigation icon on more capable browsers. The markup for the menu link looks like this:
+
+	#gvsu-library_menu a {
+		text-indent: -9999px;
+		background-image: transparent url(img/mobile_dropdown.gif) top left no-repeat;
+	}
+
+Now the page is looking pretty good on small screens , but as I make the browser window wider, it starts to look less inviting. In fact, once the browser window gets beyond 800 pixels, the site starts to look silly [Figure 4]. I needed a way to enhance the layout as the screen size increased.
 
 ### Media Queries
 
-When CSS3 came out, the existing media attribute for stylesheets was expanded. Whereas in CSS 2.1 you could declare stylesheets for screen, print, and even handheld, with CSS 3 granular attribute detection was added. Now you could serve up CSS to a screen that met certain width criteria, or was held in landscape, or even resolutions and aspect ratios[^W3CMediaQueries]. Since the techniques of determining devices and browsers were essentially trying to determine what size the screen of the device viewing the website was to serve up the optimal format, CSS width media queries were a perfect way to solve this problem without getting stuck in a race to keep up with browser versions or device models.
+If you've been writing CSS for a while, you are probably familiar with the media attribute that has been around for a few years. This allowed you to make some of your styles conditional based on the type of device the page was loading on. You could have separate styles for screens, for projectors, and for print. You could even specify a stylesheet for "handheld," but support was nearly non-existent in early mobile browsers.
 
-Media queries are added as attributes to link elements, CSS @import statements, or inline stylesheets as conditionals like the media attributes before them. For instance, here's a stylesheet that will load only if the device has a screen and the browser width is at least 600 pixels, shown in three equivalent declarations:
+The CSS3 specification pushed these media attributes farther, creating a way to check in with devices to see if certain conditions were being met. Now instead of serving the same CSS to all screens, for instance, you can specify a subset of CSS to be loading on screens of a certain width or aspect ratio. To build a responsive site, we need to adapt our layouts to the width of the user's screen.
 
-	<link rel="styleheet" type="text/css" href="styles.css" media="screen and (min-width:600px)" />
-	@import TK
-
-Or inside a stylesheet:
+Media queries are added as attributes to link elements, CSS @import statements, or inline stylesheets as conditionals like the media attributes before them. For instance, here is a block of CSS that will only be applied to screens that are at least 600 pixels wide:
 
 	@media screen and (min-width:600px) {
 		/* Awesome styles here */
 	}
 
-This gives us a lot of flexibility on loading size-specific CSS, since we can target screen widths which will help capture a wide range of devices. But there are a few best practices we should keep in mind when writing media queries.
-
-First, don't use pixel values for your media queries; use ems. Rather than being a fixed width measurement, ems are a relative measure that allows for user zooming without making our sites unusable. Unless you change the default body font-size in your style sheet, you can assume that by default 1em = 16 pixels. So for our previous example, instead of calling the stylesheet at 600pixels, we'll call it at 600 pixels / 16 pixels = 37.5ems. So our query would read:
+This gives us a lot of flexibility on loading size-specific CSS, since we can target screen widths which will help capture a wide range of devices. But pixel values in media queries have some drawbacks. A better solution would be to set our queries against ems. Rather than being a fixed width measurement, ems are a relative measure that allows for user zooming. Unless you change the default body font-size in your style sheet, you can assume that by default 1em = 16 pixels. To convert pixels to ems, just divide the desired pixel width by the pixel equivalent of an em. In this case, instead of calling the stylesheet at 600 pixels, we'll call it at 37.5 ems (600 ÷ 16 = 37.5). So our query would read:
 	
 	@media screen and (min-width: 37.5em) {
 		/* Awesome styles here */
 	}
 
-Now when a user activates their browser's zoom feature, our media queries will activate based on the relative widths of the elements, or when the break points actually fail, rather than on specific widths which could activate media queries based on pixels as the browser effectively reduces pixel density of the display.
+Now we have a mechanism to load styles based on particular widths, but I still need to figure out how these elements are going to be displayed on larger screens. For that, I need to develop a grid.
 
-Second, write all of your media queries in a single stylesheet instead of loading separate stylesheets for each query. This reduces load times since you are only doing a single server call for your CSS instead of several.
+### Fluid Grids
 
-## Responsive Design at GVSU
+Designing your site on a grid is a good idea, whether your site is fixed-width of responsive. Grids can, to some extent, give us some of the control we loved about table-based layouts, where items were placed logically in columns and rows. Grids are, after all, systems "for ordering graphical elements of text and images" (Boulton 2005), but unlike tables, which reproduce inflexible grids in markup, our grids will simply guide us as we place our content on the page.
 
-### A Responsive Framework
+Since our campus CMS dictated much of our template design, I took many of their existing design elements into account as I developed the grid that would underlie the University Libraries website. Our University's web team recently redesigned the campus homepage to be responsive, and so much of the grid that they had developed would set up the constraints of the grid I would adapt for library use.
 
-### Navigation Patterns
+To explain this, it makes more sense to work from a large screen down. On a large screen, the content of the University Libraries site is wrapped in a container 976 pixels wide, divided into four equal columns [Figure 1]. So by dividing our total page width by four, we can begin to build our grid.
 
-### Responsive Forms
+	976 ÷ 4 = 244
 
-### Tables Won't Die
+Each of our columns will be 244 pixels wide [Figure 2]. But remember that our navigation comes in the HTML source *after* all of the content, meaning that we'll have to think of the content of the site in terms of three columns instead of four, while the navigation will serve as the stand-in fourth column. Here is the markup:
+	
+	<div id="wrapper">
 
-## Next Steps
+		<div class="line">
+			<div class="column">
+				<h3>Find</h3>
+				...
+			</div>
+			<div class="column">
+				<h3>Services</h3>
+				...
+			</div>
+			<div class="column">
+				<h3>Today's Hours</h3>
+				...
+			</div>
+		</div><!-- End .line -->
+
+		<div class="line">
+			...
+		</div>
+
+		...
+
+		<div id="navigation">
+			...
+		</div>
+	</div>
+
+	#wrapper {
+		margin: 0 auto;
+		width: 976px;
+	}
+
+	.line {
+		float: right;
+		width: 732px;
+	}
+
+	.column {
+		float: left;
+		width: 244px;
+	}
+
+	#navigation {
+		float: right;
+		width: 244px;
+	}
+
+This works well for our site on large screens such as desktops or laptops, but the fixed-width layout gives us some problems on smaller screens or browser windows. But we don't have to give up our grid in order to make the page respond more gracefully to the widths of our users' screens. Instead, we can convert our pixel-based layouts to fluid, relative values using percentages. And we have everything we need in the markup above.
+
+Since each column is a child of the .line element, we simply need to know what percentage of the .line element each column should be. If we divide the desired width of our element by the width of the containing element, we can get the relative width of our elements expressed as a percentage. So for the markup above, when we divide the width of the column by the width of its container (.line) and multiply by 100, we get the relative width of each column:
+
+	(244 ÷ 732) * 100 = 33.333333333333%
+
+So we can change our CSS to
+
+	.column {
+		float: left;
+		width: 33.333333333333%;
+	}
+
+The navigation column, however, is a child of the #wrapper div, so we need a different value for the relative width of this column:
+
+	(244 ÷ 976) * 100 = 25%
+
+So we can change our CSS to
+
+	#navigation {
+		width: 25%;
+	}
+
+We can calculate the relative width of the .line container in the same way, by dividing its value in relation to the parent element:
+
+	(732÷ 976) * 100 = 75%
+
+So we can change our CSS to
+
+	.line {
+		float: right;
+		width: 75%;
+	}
+
+But we are still left with a fixed container, so our relative widths don't adjust to changes in screen size, since their container is a fixed width. But determining the relative width of the outermost containing element is tricky, because you don't actually *know* what the width of the element containing this element is. Nonetheless, we can use some guesswork and trial and error to find an appropriate value.
+
+One way to do this is to look at your existing analytics and determine what different screen sizes commonly visit your site. We're not going to necessarily lock ourselves in to making a site that targets one specific width, but you can use this information to help you better understand what relative size your outermost containing element should be. For instance, if 50% of your large-screen visits come from screens 1024 pixels wide and the other half come from screens 1200 pixels wide, you can use the formula above to find the percentages your .line div would be for each of those containers.
+
+	(976 ÷ 1024) * 100 = 95.3125%
+	(976 ÷ 1200) * 100 = 81.333333333333%
+
+Since in this hypothetical case, our audience is split evenly between these two options, we could take the average of the two values and make our .line 88.3229165%, but we might also us this as a starting place to try out a few resolutions and see what works best. In this case, 88% works pretty well on both screen sizes, so we can change our CSS now to read:
+
+	#wrapper {
+		margin: 0 auto;
+		width: 88%;
+	}
+
+
+Now our four-column layout is flexible, adjusting to differences in screen sizes. But the previous example left out something important in calculating layouts: margins and padding. When calculating the relative widths of elements, determining the containing element was straightforward. But for margins and padding are a different beast. For margins, divide the desired width of the margin by the width of the element's container. If we wanted each column to have a 6 pixel left margin, we would divide the margin width by the expected width of the .line, which is the containing element:
+
+	(6 ÷ 732) * 100 = 0.819672131148%
+
+There is no need to round these results, since computers are more comfortable than we are with complex numbers.
+
+For padding, you need to divide the desired width of padding by the width of the element itself, not its container. For instance, if we want to add 6 pixels of horizontal padding to each column in our layout, we would divide the desired pixel width by the width of .column:
+
+	(6 ÷ 244) * 100 = 2.459016393443%
+
+But because the padding is added to the width of the element, we need to remove the same relative amount from our width element to accommodate the padding. So our CSS would now look like this:
+
+	.column {
+		float: left;
+		margin-left: 0.819672131148%;
+		padding: 0 2.459016393443%;
+		width: 22.540983606557%;
+	}
+
+Now we have a nice, flexible four-column layout that looks great on wider screens. But even though we've built a flexible grid under our design, things start to look cramped at smaller screen sizes [Figure 3]. I need to understand where to load this different CSS.
+
+One common practice for determining break points for layouts is to map them to common devices. We might make some changes at 480 pixels, the width of the iPhone in landscape mode, and some more at 600 pixels, the width of a Kindle Fire in portrait. Of course, we'll have something at 768 pixels and 1024 pixels, because of the iPad in portrait and landscape. But if the years we spend building device-specific websites has taught us anything, it's that locking our designs to specific devices is unsustainable. Already, the iPad 3rd generation with its high-resolution screen is throwing off proponents of fixed, device-centric break points. The best way to determine an appropriate break point is by mapping it to your actual content, and this is going to involve some trial and error.
+
+At our smallest size, I have a single column website, while at the largest size, I want to have four columns. 
+
+
+### Flexible Images
+
+
+## Further Challenges
+
+## User Response
+
 
 ## References
 
 Allsopp, John. 2000. "The Dao of Web Design." *A List Apart*. Accessed August 16, 2012. [http://www.alistapart.com/articles/dao/](http://www.alistapart.com/articles/dao/).
+
+Boulton, Mark. 2005. "Five simple steps to designing grid systems – Preface." Accessed August 17, 2012. [http://www.markboulton.co.uk/journal/comments/five-simple-steps-to-designing-grid-systems-preface](http://www.markboulton.co.uk/journal/comments/five-simple-steps-to-designing-grid-systems-preface).
 
 Lenhart, Amanda. 2012. "Teens, Smartphones & Texting." *Pew Internet & American Life Project*. Accessed August 16, 2012. [http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx](http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx).
 
@@ -91,84 +244,11 @@ Smith, Aaron. "Cell Internet Use 2012." *Pew Internet & American Life Project*. 
 
 World Bank. 2012. "Information and Communications for Development 2012: Maximizing Mobile." Accessed August 16, 2012. [http://www.worldbank.org/ict/IC4D2012](http://www.worldbank.org/ict/IC4D2012).
 
+Wroblewski, Luke. 2012. "An Event Apart: Rolling Up Our Responsive Sleeves." Accessed August 17, 2012. [http://www.lukew.com/ff/entry.asp?1494](http://www.lukew.com/ff/entry.asp?1494)
+
 -------
 
-### Progressive Enhancement and "Mobile First"
 
-Since most websites are built making assumptions about a user's browser window size, it's no surprise that many other assumptions are made about the user's device that can lead to frustration for users with less capable devices. As libraries, we wouldn't ever think of removing a handicap ramp to access our buildings because "no one in a wheelchair comes here" or "fewer than 1% of our visitors use the ramp." Our mission is to provide the same services to all of our users, regardless of how they come to us.
-
-Yet this same inclusiveness falls away when libraries build their websites. Important considerations like HTML source order, accessibility features, and javascript fall-backs are ofte ignored simply because "not many" or "no one" is assumed to make use of them. But by overlooking these methods, we're going to shut out some users from our online services while making our jobs of building a responsive library website harder. Let me explain.
-
-#### Source Order
-
-The order that your HTML is presented to the user is important. In most websites designed for desktop, the source order goes something like this:  heading, navigation, content, footer. This is a pretty typical order, because on desktop sites we expect the navigation to be near the top of the page or along the left side. But when we load such a site without CSS, we are presented with a list of navigation items to other pages before we ever get to the content. Yet no one comes to your website for the navigation: they come for the content. 
-
-When we moved from table-based layouts to CSS, we thought that by simply keeping our style attributes separate from our HTML we were separating style from structure. But we continued to put the navigation at the top of our document structure since that's where we expected it to appear on the page. By moving navigation below our content, we can improve the experience less-capable devices have visiting our sites and use CSS to progressively enhance the site for devices that have CSS capable browsers. When coupled with media queries, we can easily move the navigation visually to the top of the page with CSS. 
-
-### Navigation patterns
-
-This was one of the first issues I had to address with our site: where would the navigation live, and how would it look on different screen sizes? I was able to convince our University web team to move the navigation below the content, which was the opposite of the existing template. But I was able to keep the existing look of the left-side navigation on large screens by floating the content and navigation right instead of the default left. 
-
-That means that on small screens, I don't have to do much at all to change the navigation. I want it to fall below the content, which it already does in the source order, so I simply need to style it. In our case, I made the decision to use the existing CMS template navigation styles since our users are accustomed to them on GVSU websites. I simply modified a few of the CSS attrbutes to allow them to behave like the rest of the columns in our layout, specifying widths as percentages instead of pixels.
-
-One problem, however, is how to let mobile users know that the navigation has moved to the bottom of the screen and to keep them from having to scroll all the way below the content if they do need to navigate to another page. This is solved most easily by adding an id to the navigation wrapper and adding an anchor link before the content. The markup on our current site looks like this:
-
-	<div id="gvsu-library_menu"><a href="#navigation">Menu</a></div>
-
-	... Content goes here ...
-
-	<div id="navigation">
-
-	... Navigation goes here
-
-For small screens we can style the link appropriately and then hide it on wider screens when the navigation is at the top. In our case, I wanted hide the text and use the same icon our campus used for their responsive homepage. I hid the text by moving it far off the screen an used a CSS background image. While you could use an image in the markup instead of the text, this would not be as useful for less capable seizes where CSS was not available or for screen readers that rely on text to help visually impaired users navigate websites. The CSS looks like this:
-
-	#gvsu-library_menu {
-		background: transparent url(img/menu.png) top left no-repeat;
-		text-indent: -9999px;
-	}
-
-	#navigation {
-		float: none;
-		width: 100%;
-	}
-
-	@media screen and (min-width: 48em) {
-		
-		#gvsu-library_menu {
-			display: none;
-		}
-
-		#navigation {
-			float: right;
-			width: 22%;
-		}
-
-
-
-RWD at GVSU
-Goals for the site: usable on any device, attractive (and maybe fun) on more capable devices
-Challenge: library website was not a cohesive site. Code base largely dictated by outside influences: hosted vendor sites (Summon, 360 Link, EZProxy login, Illiad, Ares), campus CMS (custom), library=specific tools (Library Labs, Instruction Menu) - make them all look and work uniformly on all devices. With no budget and just me.
-First step: test the waters of the CMS
-Build the Mary I promotional site inside the CMS to see what can be done. 
-	Challenges: default non-responsive styles from campus. 2 approaches: overwrite AND remove with JS - other people's templates
-	Benefits: small, contained, targeted site with single code base.
-* Navigation patterns
-Thinking big: Campus moves to responsive design
-Waiting.
-Now only CMS content needs to use our styles: template is already responsive!
-Challenges: content, tables, consitency
-* Your website has too much crap.
-* Designing a flexible grid system
-* RWD patterns for tables
-
-Vendor websites
-Challenges: unlikely to convince a vendor to move in this direction
-* Vendors that give you nearly complete control (Illiad)
-* Vendors that give you some access to branding but use tables for layout: do your best and then employ javascript to enhance capable devices  (360Link Reset)
-* Vendors that don't give you much control
-* Vendors that do device or browser detection that you can't control (Summon, LibGuides)
-* The response: library website hasn't been live long enough to get quantitative data, but in my experience there is no a-ha moment: this is what your users expect. No one pats you on the back when you meet basic expectations.
 
 
 [^haymobileweb]: Hay, Stephen, "There is No Mobile Web," *The Haystack*, January 7, 2011, accessed on August 16, 2012, [http://www.the-haystack.com/2011/01/07/there-is-no-mobile-web/](http://www.the-haystack.com/2011/01/07/there-is-no-mobile-web/)
