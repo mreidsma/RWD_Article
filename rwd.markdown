@@ -10,12 +10,32 @@ But the web itself has never had the kind of fixed canvas of the printed page. F
 
 Except the screen was never the canvas to begin with. As Ethan Marcotte has pointed out, screen size is "one step removed from our *actual* canvas: the browser window" (2011, 3). We've never had a fixed canvas, because the users of our websites always had control of the size and shape of the browser.We've never actually had control. 
 
-Accepting this doesn't mean that we have to abandon building beautiful sites and go back to pages of unstyled text. Over a decade ago, John Allsopp pleaded with web designers to "embrace the fact that the web doesn't have the same constraints [as print], and design for this flexibility" (2000). 
+Accepting this doesn't mean that we have to abandon building beautiful sites and go back to pages of unstyled text. Long before mobile devices brought the John Allsopp pleaded with web designers to "embrace the fact that the web doesn't have the same constraints [as print], and design for this flexibility" (2000). The ability to build fluid websites has always been a part of the web, but now, a decade after Allsopp's call to arms, we have a more sophisticated arsenal of standards-based tools to make websites that adapt to changes in the user's world.
+
+## Tackling Mobile in the Library
+
+When I came to Grand Valley State University in late 2010, they were already trying to find a solution to the increased mobile usage of their website. That year, the GVSU Library website traffic from mobile devices was a measley .5% of all visits, while the University as a whole saw traffic from mobile devices reach 4.5% of all visits. Now just 18 months later, GVSU's library has a tenfold increase in mobile traffic. Visits from mobile devices for the first 6 months of this year hit 4.95%. That's 1 in every 20 visitors to our website using a mobile device.
+
+As an academic library, we knew this growth will only continue. Recent studies report that a whopping 77% of teens age 12-17 have a cellphone, and 25% of those are smartphones (Lenhart 2012), and 45% of 18-29 year-old who browse the web on their phone use the phone as their primary device (Smith 2012). We needed to do something about our fixed-width website, which was barely usable on small-screen devices.
+
+I developed a few core goals for the new site. First, all content and services would be available in full on all devices. I didn't want to make assumptions about what users on mobile devices wouldn't use. As a library, our goal is to offer the same services to all of our patrons. We would never think of limiting access to a patron in a wheel chair because we assumed they wouldn't be interested, yet it is common practice to assume that mobile users only want hours and directions. I also wanted to avoid having 2 URLs for each piece of content, one for the mobile site and one for the desktop site, which can be frustrating for multiple-device users. We would have one site, not separate mobile and desktop websites. 
+
+I also wanted to take advantage of the capabilities of newer devices without leaving older devices or assistive technologies like screen readers from using our services. So I would build the site with clean, standards-based HTML and then enhance the site with CSS and JavaScript on more capable devices as much as possible. Like most libraries, we rely on many hosted vendor products to provide services to our patrons, so I wasn't in charge of much of the code being served to our patrons. Even though each vendor offered different levels of customization possibilities, I wanted all our disparate sites to appear to be a single, cohesive website. 
+
+I undertook this project with no budget and a team of one (me).
+
+Some of our goals had to be revised, since we immediately encountered some challenges that were out of our control. Like most libraries, we rely on hosted vendor projects for many of our services. As such, having a single code base was not technically possible, since many of our customizations would need to be spread over a variety of proprietary hosted interfaces that offered differing levels of customization. However, we decided to start with the campus CMS pages, since the University's website design would determine the overall look of our template. In addition, we work closely with our University's web team and had the most flexibility on making design changes.
+
+Our first step was to implement RWD techniques on a smaller sub-website within the library to see what challenges would pop up working within the University's framework. In the spring of 2011 I started work redesigning the website for our new library usng responsive principles. [Figure] In some ways, this site was the antithesis of a library website. At only 7 pages, it was small, and it lacked many of the features we expect from typical library sites: namely, search boxes and long lists of resources. Nevertheless, I knew that many of the issues we would face in adapting a CMS site to RWD would be universal.
+
+Our existing template used tables to structure much of the site's layout, and so I modified the template to finally move to an all-CSS layout using divs. Our webteam then loaded the library-specific CSS file after the campus-wide styles so that my styles would overwrite the existing, fixed-layout styles. For the most part this worked, although I later ran into a few issues where the base stylesheet continued to interfere with my new styles. 
 
 
 ## References
 
 Allsopp, John. 2000. "The Dao of Web Design." *A List Apart*. Accessed August 16, 2012. [http://www.alistapart.com/articles/dao/](http://www.alistapart.com/articles/dao/).
+
+Lenhart, Amanda. 2012. "Teens, Smartphones & Texting." *Pew Internet & American Life Project*. Accessed August 16, 2012. [http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx](http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx).
 
 Marcotte, Ethan. 2011. *Responsive Web Design*. New York: A Book Apart.
 
@@ -23,12 +43,14 @@ Mitchell, Amy, Tom Rosenstiel, and Leah Christian. 2012. "Mobile Devices and New
 
 Pew Internet & American Life Project. 2012. "A Closer Look at Gadget Ownership." Accessed August 16, 2012. [http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx](http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx).
 
+Smith, Aaron. "Cell Internet Use 2012." *Pew Internet & American Life Project*. Accessed August 16, 2012. [http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx](http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx).
+
 World Bank. 2012. "Information and Communications for Development 2012: Maximizing Mobile." Accessed August 16, 2012. [http://www.worldbank.org/ict/IC4D2012](http://www.worldbank.org/ict/IC4D2012).
 
 -------
 
 
-When I came to Grand Valley State University in late 2010, they were already trying to find a solution to the increased mobile usage of their website. That year, the GVSU Library website traffic from mobile devices was a measley .5% of all visits, while the University as a whole saw traffic from mobile devices reach 4.5% of all visits. Now just 18 months later, GVSU's library has a tenfold increase in mobile traffic. Visits from mobile devices for the first 6 months of this year hit 4.95%. That's 1 in every 20 visitors to our website using a mobile device. This growth is only continuing.
+
 
 Most of the discussion about providing access to our services for mobile users centered around the most common practice at the time: detecting a user's device or browser and serving up a different, "stripped-down" version of the lbrary website to mobile devices. Libraries thus find themselves supporting two websites: the "mobile" website and the "desktop" website. (Some even support a separate "iPhone" website.) The effect is to create the perception of two different "Webs", the "Mobile Web," where efficiency rules, and the "Desktop Web," which is what everyone thinks of as the Web.
 
@@ -36,7 +58,7 @@ But this is just a perception. "There is no Mobile Web," Stephen Hay wrote. "The
 
 Web design has always been a little stuck in awe of the traditions of print. For many years, we web designers relied on tables to create layouts and controlled and sophisticated as print brochures. We clamored for control, and fought to have our sites look the same in every browser. But what we missed in all of this was that the fluidity and lack of control the Web offers the designer is not a bug; rather, it is a feature. As John Allsopp wrote twelve years ago," The control which designers know in the print medium, and often desire in the web medium, is simply a function of the limitation of the printed page. We should embrace the fact that the web doesn’t have the same constraints, and design for this flexibility.[^Allsopp]"
 
-We made assumptions about mobile devices, as well. In the early ninties, a teenager like Zach Morris on Saved By the Bell using a cell phone was a punch line in a sitcom. Mobile phones were for busy professionals who were on the go and didn't have time to wait around for calls. They certainly weren't going to be someone's primary communications tool. Twenty years later, we are on track to have more activated mobile devices than people on the planet[^Worldbank]. 88% of Americans own a cell phone, and nearly half of those are smartphones.[^PewGadgets] A whopping 77% of teens age 12-17 have a cellphone, and 25% of those are smartphones.[^PewTeens] Mobile phones are no longer a business tool for the distracted professional. They are a lifestyle tool for everyone.
+We made assumptions about mobile devices, as well. In the early ninties, a teenager like Zach Morris on Saved By the Bell using a cell phone was a punch line in a sitcom. Mobile phones were for busy professionals who were on the go and didn't have time to wait around for calls. They certainly weren't going to be someone's primary communications tool. Twenty years later, we are on track to have more activated mobile devices than people on the planet[^Worldbank]. 88% of Americans own a cell phone, and nearly half of those are smartphones.[^PewGadgets] [^PewTeens] Mobile phones are no longer a business tool for the distracted professional. They are a lifestyle tool for everyone.
 
 But the myth of the Mobile web still encourages us to think about mobile web use as occasional use by distracted people who are on the go on a slow network. These assumptions about users are entrenched. But the data shows a more complicated picture of how people use the web on mobile devices. According to a 2012 Pew Internet report, 17% of cell phone owners connect to the web primarily or only through their phone, while 45% of 18-29 year-old who browse the web on their phone use the phone as their primary device[^PewCellUse].  
 
