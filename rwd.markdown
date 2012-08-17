@@ -26,7 +26,7 @@ I undertook this project with no budget and a team of one (me). It took about a 
 
 ## Responsive Web Design
 
-In my work with clients I had already embraced 
+In early 2010, Ethan Marcotte, a web design from Boston, coined the phrase Responsive Web Design to refer to a suite of techniques for building fluid, standards-based websites that adapted user devices. By designing sites with a fluid grid, using CSS media queries to change styles according to device screen sizes, and using flexible images, Marcotte showed that we no longer needed to serve up separate websites to mobile devices. We could have a single code base, a single URL for each resource, and a great looking site, no matter the device. This was the approach I took to redesigning our site.
 
 ### Mobile First
 
@@ -294,10 +294,15 @@ Now our images will never be larger than their containing elements. As the conta
 
 Of course, responsive images are important, and a big topic of debate. If you are building a digital library with scanned images or your site uses a lot of large image files, you probably don't want to resort to scaling down 1000 pixel-wide images to fit on phone screens. There are several solutions under discussion for how to serve up different images to devices based on screen sizes, but none of them have been implemented by browser makers yet. If you need to serve up a lot of images, I recommend looking at Scott Jehl's Picturefill ([https://github.com/scottjehl/picturefill](https://github.com/scottjehl/picturefill)), which replicates one of the proposed solutions in JavaScript. 
 
-## Further Challenges
-
 ## User Response
 
+Since we've only just launched the responsive design on the pages in our CMS, it is too soon to get any useful data on how our users are making use of the site. Anecdotally, however, I can say that the response has been pretty quiet. Our primary audience is our students, and as more and more of them use mobile devices, their expectations for the sites they visit increase, as well. We're expected to have a site that works as well on a mobile device as it does on a desktop computer. And no one hands out gold stars when you meet their expectations.
+
+## Further Challenges
+
+Now that our library homepage and CMS are responsive, I'm faced with the task of replicating this design in all of our hosted vendor systems. Some vendors give us a lot of flexibility in how we design the user interface, such as Illiad, our Interlibrary Loan system. Others, give us less control. In order to gain control of the styles of our 360Link Link resolver from Serials Solutions, I wrote a script that scrapes the page and then rewrites it on the fly in our library's template. Others, like Serials Solutions Summon Discoovery Service, give us no control over the design of the page. On those systems that do give us the ability to change things, however, we want to be consistent.
+
+This is perhaps the greatest challenge for libraries employing Responsive Web Design. Because we likely will never have a consistent template that works across all of our vendor products, I may end up writing different CSS for every product in order to achieve the illusion of consistency. But in the end, I'm able to offer all of our services to our users regardless of the device they use. 
 
 ## References
 
@@ -323,10 +328,4 @@ Wroblewski, Luke. 2012. "An Event Apart: Rolling Up Our Responsive Sleeves." Acc
 
 -------
 
-
-
-
-[^haymobileweb]: Hay, Stephen, "There is No Mobile Web," *The Haystack*, January 7, 2011, accessed on August 16, 2012, [http://www.the-haystack.com/2011/01/07/there-is-no-mobile-web/](http://www.the-haystack.com/2011/01/07/there-is-no-mobile-web/)
-
-[^W3CMediaQueries]: "Media Queries," *W3C*, June 19, 2012, accessed Agust 16, 2012, [http://www.w3.org/TR/css3-mediaqueries/](http://www.w3.org/TR/css3-mediaqueries/)
 	
