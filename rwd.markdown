@@ -1,3 +1,33 @@
+At some point between the moment I am writing these words and the moment you are reading them on a printed page, this essay has been coiffed and primped by a designer for optimum readability. That designer, working in the medium of print, has at her disposal knowledge that we who make websites for a living can only dream of: she knew, with utmost certainly, the size of the book, her canvas, and made her design decisions accordingly.
+
+If you were reading this on the web, I wouldn't be able to predict the size of the "page" you were viewing, because web-enabled devices have never looked so different. We can no longer count on one or two common screen resolutions when we start planning a website. We're on track to have more mobile devices than people on the planet (World Bank 2012), and in the U.S. nearly half of adults who own cellphones have a smartphone (Pew 2012). What's more, recent data is showing that adults who own more than one Web-enabled device is growing, with over half of computer owners also owning a smartphone and 13% of Americans owning a laptop or desktop computer, a tablet, and a smartphone (Mitchell, Rosenstiel, and Christian 2012). We have more devices with a greater variety of screens to design for than ever before.
+
+## Giving Up Control
+
+Web designers are just waking up to the realization that they no longer have the kind of control a print designer enjoys. But true to our desire for control, we address this problem by creating more of the same fixed-width layouts, but this time one roughly phone-shaped, another tabletish in size, and finally, the "regular" desktop site. We check for known mobile devices and browsers and send these visitors to separate websites. We Our feeling of control returns, until new phones and tablets hit the streets, requiring us to look for another dozen, or two dozen devices to make sure each device gets the appropriate website.
+
+But the web itself has never had the kind of fixed canvas of the printed page. For the past twenty years, we have built fixed-width websites for a handful of screen sizes dictated by screen manufacturers. In the mid-nineties we made sites that were optimized for screens 480 by 640 pixels, and a few years later, we expanded to 600 by 800 pixels. In the last decade we hovered comfortably designing for screens 1024 pixels wide and 768 pixels high, and we used every inch of that canvas, because we knew the sizes of the screens our visitors had on their computers.
+
+Except the screen was never the canvas to begin with. As Ethan Marcotte has pointed out, screen size is "one step removed from our *actual* canvas: the browser window" (2011, 3). We've never had a fixed canvas, because the users of our websites always had control of the size and shape of the browser.We've never actually had control. 
+
+Accepting this doesn't mean that we have to abandon building beautiful sites and go back to pages of unstyled text. Over a decade ago, John Allsopp pleaded with web designers to "embrace the fact that the web doesn't have the same constraints [as print], and design for this flexibility" (2000). 
+
+
+## References
+
+Allsopp, John. 2000. "The Dao of Web Design." *A List Apart*. Accessed August 16, 2012. [http://www.alistapart.com/articles/dao/](http://www.alistapart.com/articles/dao/).
+
+Marcotte, Ethan. 2011. *Responsive Web Design*. New York: A Book Apart.
+
+Mitchell, Amy, Tom Rosenstiel, and Leah Christian. 2012. "Mobile Devices and News Consumption: Some Good Signs for Journalism." *The State of the News Media 2012*. [http://stateofthemedia.org/2012/mobile-devices-and-news-consumption-some-good-signs-for-journalism/](http://stateofthemedia.org/2012/mobile-devices-and-news-consumption-some-good-signs-for-journalism/).
+
+Pew Internet & American Life Project. 2012. "A Closer Look at Gadget Ownership." Accessed August 16, 2012. [http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx](http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx).
+
+World Bank. 2012. "Information and Communications for Development 2012: Maximizing Mobile." Accessed August 16, 2012. [http://www.worldbank.org/ict/IC4D2012](http://www.worldbank.org/ict/IC4D2012).
+
+-------
+
+
 When I came to Grand Valley State University in late 2010, they were already trying to find a solution to the increased mobile usage of their website. That year, the GVSU Library website traffic from mobile devices was a measley .5% of all visits, while the University as a whole saw traffic from mobile devices reach 4.5% of all visits. Now just 18 months later, GVSU's library has a tenfold increase in mobile traffic. Visits from mobile devices for the first 6 months of this year hit 4.95%. That's 1 in every 20 visitors to our website using a mobile device. This growth is only continuing.
 
 Most of the discussion about providing access to our services for mobile users centered around the most common practice at the time: detecting a user's device or browser and serving up a different, "stripped-down" version of the lbrary website to mobile devices. Libraries thus find themselves supporting two websites: the "mobile" website and the "desktop" website. (Some even support a separate "iPhone" website.) The effect is to create the perception of two different "Webs", the "Mobile Web," where efficiency rules, and the "Desktop Web," which is what everyone thinks of as the Web.
@@ -66,6 +96,11 @@ Some of our goals had to be revised, since we immediately encountered some chall
 Our first step was to implement RWD techniques on a smaller sub-website within the library to see what challenges would pop up working within the University's framework. In the spring of 2011 I started work redesigning the website for our new library usng responsive principles. [Figure] In some ways, this site was the antithesis of a library website. At only 7 pages, it was small, and it lacked many of the features we expect from typical library sites: namely, search boxes and long lists of resources. Nevertheless, I knew that many of the issues we would face in adapting a CMS site to RWD would be universal.
 
 Our existing template used tables to structure much of the site's layout, and so I modified the template to finally move to an all-CSS layout using divs. Our webteam then loaded the library-specific CSS file after the campus-wide styles so that my styles would overwrite the existing, fixed-layout styles. For the most part this worked, although I later ran into a few issues where the base stylesheet continued to interfere with my new styles. 
+
+### Fluid Grids
+
+Perhaps the most obvious and useful aspect of RWD is moving chunks of content around to make attractive and readable layouts for different screen sizes. While larger screens encourage designers to flex 
+
 
 ### Progressive Enhancement and "Mobile First"
 
@@ -167,9 +202,6 @@ Horrigan, John. A Typology of Information and Communication Technology Users. Pe
 
 [^Allsopp]: Allsopp, John, "The Dao of Web Design," *A List Apart*, April 7, 2000, accessed August 16, 2012, [http://www.alistapart.com/articles/dao/](http://www.alistapart.com/articles/dao/)
 
-[^Worldbank]: "Information and Communications for Development 2012: Maximizing Mobile," *The World Bank*, acessed August 16, 2012, [http://www.worldbank.org/ict/IC4D2012](http://www.worldbank.org/ict/IC4D2012)
-
-[^PewGadgets]: "A Closer Look at Gadget Ownership," *Pew Internet & American Life Project*, June 28, 2012, accessed August 16, 2012, [http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx](http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx)
 
 [^PewTeens]: Lenhart, Amanda, "Teens, Smartphones & Texting," *Pew Internet & American Life Project*, March 19, 2012, access August 16, 2012, [http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx](http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx)
 
@@ -178,4 +210,8 @@ Horrigan, John. A Typology of Information and Communication Technology Users. Pe
 [^ALARWD]: Marcotte, Ethan, "Responsive Web Design," *A List Apart*, May 25, 2010, accessed August 16, 2012, [http://www.alistapart.com/articles/responsive-web-design/](http://www.alistapart.com/articles/responsive-web-design/)
 
 [^W3CMediaQueries]: "Media Queries," *W3C*, June 19, 2012, accessed Agust 16, 2012, [http://www.w3.org/TR/css3-mediaqueries/](http://www.w3.org/TR/css3-mediaqueries/)
+
+Marcotte, Ethan. 2011. *Responsive Web Design*. New York: A Book Apart.
+
+Mitchell, Amy, Tom Rosenstiel, and Leah Christian. 2012. "Mobile Devices and News Consumption: Some Good Signs for Journalism." *The State of the News Media 2012*. http://stateofthemedia.org/2012/mobile-devices-and-news-consumption-some-good-signs-for-journalism/
 	
