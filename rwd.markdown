@@ -213,8 +213,71 @@ Now we have a nice, flexible four-column layout that looks great on wider screen
 
 One common practice for determining break points for layouts is to map them to common devices. We might make some changes at 480 pixels, the width of the iPhone in landscape mode, and some more at 600 pixels, the width of a Kindle Fire in portrait. Of course, we'll have something at 768 pixels and 1024 pixels, because of the iPad in portrait and landscape. But if the years we spend building device-specific websites has taught us anything, it's that locking our designs to specific devices is unsustainable. Already, the iPad 3rd generation with its high-resolution screen is throwing off proponents of fixed, device-centric break points. The best way to determine an appropriate break point is by mapping it to your actual content, and this is going to involve some trial and error.
 
-At our smallest size, I have a single column website, while at the largest size, I want to have four columns. 
+Because most websites are designed with wide, fixed-wodth layouts, most mobile devices scale these sites to be displayed on smaller screens. If you've ever loaded a website on your phone or tablet and then found yourself frantically pinching and zooming to make the text readable, you're familiar with this behavior. Because we don't want these devices to turn our newly responsive website into a pinch and zoom mess, we need a way to tell them to display our site at the scale and width of the device. All we need to do is add the following meta tag to the <code><head></code> of our document.
 
+	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+Now we're ready to go. At our smallest size, I have a single column website, while at the largest size, I want to have four columns. The scientific technique I'll use for determining where to put in some media queries to enhance the layout is to slowly make the window bigger and add new styles when things start to look crummy.
+
+As I start to scale up, I start to notice that the white space after the list items starts to look excessive at around 480 pixels (30em). So I'm going to add a media query to switch to a 2-column layout here to make better use of the screen width [Figure TK]:
+
+	@media screen and (min-width: 30em) {
+		.column {
+			float: left;
+			padding: 0 1%;
+			width: 48%;
+		}
+	}
+
+The rest of the page layout looks alright, so I'll continue to scale the width of the browser window up. At around 650 pixels wide (40.625em), the extra room in each column is starting to feel excessive, so I'm going to move to a three column layout. The third column will be our left-side navigation. I need to set a relative width for the .line elements that contain our columns and a width forthe navigation. In addition, I want to hide that anchor link I added on small screens to give users easy access to navigation [Figure TK]. The new media query looks like this:
+
+	@media screen and (min-width: 40.625em) {
+		.line {
+			float: right;
+			width: 66.66666666%;
+		}
+
+		#navigation {
+			width: 33.3333333%;
+		}
+
+		#gvsu-library_menu {
+			display: none;
+		}
+	}
+
+One more thing I notice at this size is that the search bar is getting a little bit long. I want to scale it down and center it, so I'll add the following styles to my media query:
+
+	#search-box {
+		margin: 0 auto;
+		width: 48%;
+	}
+
+Now the site is really coming along, but as the screen gets wider, it again feels more stretched. By 900 pixels (56.25em) the three-column layout is feeling a bit stretched, so it's time to use those styles we created above for our four-column grid. Since our campus homepage sets a fixed width of 976 pixels on the content container at 1024 pixels, I added the following style to make the outer wrapper stop scaling. 
+
+	@media screen and (min-width: 64em) {
+		#wrapper {
+			width: 61em;
+		}
+	}
+
+Since all of the child styles are set in relative widths, there was no need to change any of their styles to be fixed. They will stop scaling when their parent element becomes fixed.
+
+Now I have a basic responsive website that adapts its layout to the size of the screen. And since we began with a foundation of clean, semantic HTML, I can be sure that the site will work great on any web-capable device.
+
+### Internet Explorer, or, What Else is New
+
+While media queries enjoy great support in modern browsers, Internet Explorer 8 and earlier don't support them. If you build your styles like I do and start with your mobile styles and then add styles for larger screens with min-width queries, Internet Explorer will simply load the styles for small screens. If you're an academic librarian like me, you have a campus full of computers from George W. Bush's first term running ancient versions of Internet Explorer, so simply leaving this large group of users with small-screen styles on large screens isn't an option. But there are a few solutions to get Internet Explorer to behave.
+
+First, there are several JavaScript polyfills that will patch browsers that don't support media queries. Scott Jehl's Respond.js is the most lightweight, weighing in at only 1k, and it works very well if you have a single stylesheet. You can find the source code at [http://github.com/scottjehl/Respond](http://github.com/scottjehl/Respond). If you can't use JavaScript, you could restructure your media queries to begin with your wie screen styles, and then use max-width: media queries to scale the site down to smaller screens. IE will ignore all of the styles in media queries, so will only load the initial styles for wide screens. This is the approach our campus uses, but it makes me uncomfortable. Less capable devices that support CSS but not media queries will get served a "desktop" website instead of a basic, small-screen optimized site. In my experience, scaling down from a desktop site also makes for more CSS.
+
+The solution I chose was to create an IE-specific stylesheet that loads after your media queries, passing all of the wide-screen styles to early versions of Internet Explorer. That would look something like this:
+
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" type="text/css" href="ie.css" />
+	<![endif]-->
+
+Since respond.js conflicted with some aspects of our campus CMS, this was the solution I took for the library website. IE users still won't get a responsive site, but users will less-capable mobile devices won't get a site styled for desktop, either.
 
 ### Flexible Images
 
