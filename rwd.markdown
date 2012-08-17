@@ -22,59 +22,13 @@ I developed a few core goals for the new site. First, all content and services w
 
 I also wanted to take advantage of the capabilities of newer devices without leaving older devices or assistive technologies like screen readers from using our services. So I would build the site with clean, standards-based HTML and then enhance the site with CSS and JavaScript on more capable devices as much as possible. Like most libraries, we rely on many hosted vendor products to provide services to our patrons, so I wasn't in charge of much of the code being served to our patrons. Even though each vendor offered different levels of customization possibilities, I wanted all our disparate sites to appear to be a single, cohesive website. 
 
-I undertook this project with no budget and a team of one (me).
-
-Some of our goals had to be revised, since we immediately encountered some challenges that were out of our control. Like most libraries, we rely on hosted vendor projects for many of our services. As such, having a single code base was not technically possible, since many of our customizations would need to be spread over a variety of proprietary hosted interfaces that offered differing levels of customization. However, we decided to start with the campus CMS pages, since the University's website design would determine the overall look of our template. In addition, we work closely with our University's web team and had the most flexibility on making design changes.
-
-Our first step was to implement RWD techniques on a smaller sub-website within the library to see what challenges would pop up working within the University's framework. In the spring of 2011 I started work redesigning the website for our new library usng responsive principles. [Figure] In some ways, this site was the antithesis of a library website. At only 7 pages, it was small, and it lacked many of the features we expect from typical library sites: namely, search boxes and long lists of resources. Nevertheless, I knew that many of the issues we would face in adapting a CMS site to RWD would be universal.
-
-Our existing template used tables to structure much of the site's layout, and so I modified the template to finally move to an all-CSS layout using divs. Our webteam then loaded the library-specific CSS file after the campus-wide styles so that my styles would overwrite the existing, fixed-layout styles. For the most part this worked, although I later ran into a few issues where the base stylesheet continued to interfere with my new styles. 
-
-
-## References
-
-Allsopp, John. 2000. "The Dao of Web Design." *A List Apart*. Accessed August 16, 2012. [http://www.alistapart.com/articles/dao/](http://www.alistapart.com/articles/dao/).
-
-Lenhart, Amanda. 2012. "Teens, Smartphones & Texting." *Pew Internet & American Life Project*. Accessed August 16, 2012. [http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx](http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx).
-
-Marcotte, Ethan. 2011. *Responsive Web Design*. New York: A Book Apart.
-
-Mitchell, Amy, Tom Rosenstiel, and Leah Christian. 2012. "Mobile Devices and News Consumption: Some Good Signs for Journalism." *The State of the News Media 2012*. [http://stateofthemedia.org/2012/mobile-devices-and-news-consumption-some-good-signs-for-journalism/](http://stateofthemedia.org/2012/mobile-devices-and-news-consumption-some-good-signs-for-journalism/).
-
-Pew Internet & American Life Project. 2012. "A Closer Look at Gadget Ownership." Accessed August 16, 2012. [http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx](http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx).
-
-Smith, Aaron. "Cell Internet Use 2012." *Pew Internet & American Life Project*. Accessed August 16, 2012. [http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx](http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx).
-
-World Bank. 2012. "Information and Communications for Development 2012: Maximizing Mobile." Accessed August 16, 2012. [http://www.worldbank.org/ict/IC4D2012](http://www.worldbank.org/ict/IC4D2012).
-
--------
-
-
-
-
-Most of the discussion about providing access to our services for mobile users centered around the most common practice at the time: detecting a user's device or browser and serving up a different, "stripped-down" version of the lbrary website to mobile devices. Libraries thus find themselves supporting two websites: the "mobile" website and the "desktop" website. (Some even support a separate "iPhone" website.) The effect is to create the perception of two different "Webs", the "Mobile Web," where efficiency rules, and the "Desktop Web," which is what everyone thinks of as the Web.
-
-But this is just a perception. "There is no Mobile Web," Stephen Hay wrote. "There is only The Web, which we view in different ways.[^haymobileweb]" By cordoning off mobile devices into a ghettoized "Mobile Web," we convinced ourselves that people using the Web on mobile devices were doing something very different than those using the "Desktop" web. We made a lot of assumptions about web browsers and our users, in other words.
-
-Web design has always been a little stuck in awe of the traditions of print. For many years, we web designers relied on tables to create layouts and controlled and sophisticated as print brochures. We clamored for control, and fought to have our sites look the same in every browser. But what we missed in all of this was that the fluidity and lack of control the Web offers the designer is not a bug; rather, it is a feature. As John Allsopp wrote twelve years ago," The control which designers know in the print medium, and often desire in the web medium, is simply a function of the limitation of the printed page. We should embrace the fact that the web doesn’t have the same constraints, and design for this flexibility.[^Allsopp]"
-
-We made assumptions about mobile devices, as well. In the early ninties, a teenager like Zach Morris on Saved By the Bell using a cell phone was a punch line in a sitcom. Mobile phones were for busy professionals who were on the go and didn't have time to wait around for calls. They certainly weren't going to be someone's primary communications tool. Twenty years later, we are on track to have more activated mobile devices than people on the planet[^Worldbank]. 88% of Americans own a cell phone, and nearly half of those are smartphones.[^PewGadgets] [^PewTeens] Mobile phones are no longer a business tool for the distracted professional. They are a lifestyle tool for everyone.
-
-But the myth of the Mobile web still encourages us to think about mobile web use as occasional use by distracted people who are on the go on a slow network. These assumptions about users are entrenched. But the data shows a more complicated picture of how people use the web on mobile devices. According to a 2012 Pew Internet report, 17% of cell phone owners connect to the web primarily or only through their phone, while 45% of 18-29 year-old who browse the web on their phone use the phone as their primary device[^PewCellUse].  
-
-How we use our phones is different in reality as well. TK% of smartphone owners browse the web on a mobile device while home, TK% while waiting in line or during miscellaneous downtimes[SOURCE], and TK% even admit to using them in the bathroom[SOURCE]. The thing is, phones are increasingly becoming a go-to web browsing device. As libraries who strive to provide access everyone, making our services available on mobile devices is a must. Clearly we need a way out of the myth of the Mobile Web.
-
-But we might still make use of device and browser detection without falling into the trap of the "Mobile Web," couldn't we? Perhaps, but there are other technical challenges with these methods that will be difficult to overcome. First, with countless smartphone models released every week, keeping up with such a device or browser library is unsustainable, especially for the small, perpetually understaffed library web team. In addition, this requires our small teams (or more likely, individuals) to maintain two (or three) separate code bases, even if each site offers complete functionality. 
-
-Perhaps the most frustrating problem with this method affect users. By redirecting to a mobile version of the website, we generate multiple URLs for the same content. If a user visits our site on a mobile device to read an article and is redirected to http://m.oursite.com/article, then when they share that URL with others, everyone will be directed to the mobile version of the page. This can be frustrating to users on desktop computers, who often get a site formatted for a very different screen. Even worse, if we don't offer all of our site's functionality to the mobile site, then users on "desktop" computers find themseleves equally unable to perform tasks that were deemed unnecessary on a mobile site.
-
-But more challenges are ahead. Many popular video game consoles available today offer robust web browsers, and SmartTVs are becoming more and more affordable. What happens when you have to maintain a mobile, a desktop, and a widescreen TV website? What about the next device that comes along that changes our assumptions about how people use the web?
-
-There is an easier way to build sites for existing and future devices. We can maintain a single code base, making life easier for both our employees and our users, while still providing an optimal experience for any range of devices. And best of all, we can do it using good old Web standards.
+I undertook this project with no budget and a team of one (me). But I didn't need a team of designers or developers to achieve my goals, since there was a technique ready-made to help me build the kind of site we wanted for our library: Responsive Web Design.
 
 ## Responsive Web Design
 
-In early 2010, Ethan Marcotte, a web designer from Boston, coined the name "Responsive Web Design" to refer to a suite of design techniques for building fluid, adaptive websites that respond to the device they are viewed on[^ALARWD]. By designing sites with fluid grids, using flexible images, and employing new CSS media queries, Marcotte was able to build websites that scaled beautifully on any screen size. 
+In 2010, Ethan Marcotte coined the name "Responsive Web Design" to describe a suite of techniques for building sites that adapt to the conditions of the user. For instance, by polling the user's device for the size of its screen and adapting the layout accordingly, Marcotte was able to build beautiful, fluid sites that looked good on any device or window size. The techniques themselves are simple. To build a responsive site you need a design based on a flexible grid, adaptable images, and CSS3 media queries. In addition, you need to let go of the need for the kind of control you thought you had building fixed-width sites and embrace the fluidity of the web.
+
+Library websites are generally complex, sprawling things, and ours at Grand Valley is no exception. Because of this, our site doesn't work well as an example for the basics of Responsive Web Design. So before we get to how I made GVSU's library site responsive and some of the challenges libraries face, I'll walk you through the basic techniques on another site I built for the non-existent Library or Librarian (LOL) Library. You can follow along on the web at [http://lollibrary.org](http://lollibrary.org).
 
 ### Fluid Grids
 
@@ -107,22 +61,37 @@ Now when a user activates their browser's zoom feature, our media queries will a
 
 Second, write all of your media queries in a single stylesheet instead of loading separate stylesheets for each query. This reduces load times since you are only doing a single server call for your CSS instead of several.
 
-## RWD at GVSU: 
+## Responsive Design at GVSU
 
-When we started talking about implementing RWD at GVSU, we had a few core goals for the new site. First, it had to work and be usable on any device, from an 8-year-old flip phone with a bare-bones web browser to the latest tablets and laptops our students and faculty were increasingly using. We wanted a single code base based on Web standards, since our Web services staff is just me and one part-time student. We wanted it to be attractive and maybe even fun to use, and we wanted to take advantage of the capabilities of newer devices without leaving older phones and computers from accessing our services.
+### A Responsive Framework
 
-In addition, we wanted all of our disparate sites that are spread across different vendors to appear to be a cohesive website. With no budget, and just me making changes.
+### Navigation Patterns
 
-Some of our goals had to be revised, since we immediately encountered some challenges that were out of our control. Like most libraries, we rely on hosted vendor projects for many of our services. As such, having a single code base was not technically possible, since many of our customizations would need to be spread over a variety of proprietary hosted interfaces that offered differing levels of customization. However, we decided to start with the campus CMS pages, since the University's website design would determine the overall look of our template. In addition, we work closely with our University's web team and had the most flexibility on making design changes.
+### Responsive Forms
 
-Our first step was to implement RWD techniques on a smaller sub-website within the library to see what challenges would pop up working within the University's framework. In the spring of 2011 I started work redesigning the website for our new library usng responsive principles. [Figure] In some ways, this site was the antithesis of a library website. At only 7 pages, it was small, and it lacked many of the features we expect from typical library sites: namely, search boxes and long lists of resources. Nevertheless, I knew that many of the issues we would face in adapting a CMS site to RWD would be universal.
+### Tables Won't Die
 
-Our existing template used tables to structure much of the site's layout, and so I modified the template to finally move to an all-CSS layout using divs. Our webteam then loaded the library-specific CSS file after the campus-wide styles so that my styles would overwrite the existing, fixed-layout styles. For the most part this worked, although I later ran into a few issues where the base stylesheet continued to interfere with my new styles. 
+## Next Steps
 
-### Fluid Grids
+## References
 
-Perhaps the most obvious and useful aspect of RWD is moving chunks of content around to make attractive and readable layouts for different screen sizes. While larger screens encourage designers to flex 
+Allsopp, John. 2000. "The Dao of Web Design." *A List Apart*. Accessed August 16, 2012. [http://www.alistapart.com/articles/dao/](http://www.alistapart.com/articles/dao/).
 
+Lenhart, Amanda. 2012. "Teens, Smartphones & Texting." *Pew Internet & American Life Project*. Accessed August 16, 2012. [http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx](http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx).
+
+Marcotte, Ethan. 2010. "Responsive Web Design." *A List Apart*. Accessed August 16, 2012. [http://www.alistapart.com/articles/responsive-web-design/](http://www.alistapart.com/articles/responsive-web-design/).
+
+Marcotte, Ethan. 2011. *Responsive Web Design*. New York: A Book Apart.
+
+Mitchell, Amy, Tom Rosenstiel, and Leah Christian. 2012. "Mobile Devices and News Consumption: Some Good Signs for Journalism." *The State of the News Media 2012*. [http://stateofthemedia.org/2012/mobile-devices-and-news-consumption-some-good-signs-for-journalism/](http://stateofthemedia.org/2012/mobile-devices-and-news-consumption-some-good-signs-for-journalism/).
+
+Pew Internet & American Life Project. 2012. "A Closer Look at Gadget Ownership." Accessed August 16, 2012. [http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx](http://pewinternet.org/Infographics/2012/A-Closer-Look-at-Gadget-Ownership.aspx).
+
+Smith, Aaron. "Cell Internet Use 2012." *Pew Internet & American Life Project*. Accessed August 16, 2012. [http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx](http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx).
+
+World Bank. 2012. "Information and Communications for Development 2012: Maximizing Mobile." Accessed August 16, 2012. [http://www.worldbank.org/ict/IC4D2012](http://www.worldbank.org/ict/IC4D2012).
+
+-------
 
 ### Progressive Enhancement and "Mobile First"
 
@@ -176,19 +145,6 @@ For small screens we can style the link appropriately and then hide it on wider 
 		}
 
 
-This solution is simple and relies only on 
-
-
-
- 
-
-JavaScript has gotten a bad rap over the past decade, but it's an important tool for building and customizing sophisticated front-end experiences for our users. One of the main reasons it has gotten such a bad rap in the past is 
-
-
-## Thinking big: campus-wide RWD
-
-## GVSU Library website goes responsive
-
 
 RWD at GVSU
 Goals for the site: usable on any device, attractive (and maybe fun) on more capable devices
@@ -214,26 +170,8 @@ Challenges: unlikely to convince a vendor to move in this direction
 * Vendors that do device or browser detection that you can't control (Summon, LibGuides)
 * The response: library website hasn't been live long enough to get quantitative data, but in my experience there is no a-ha moment: this is what your users expect. No one pats you on the back when you meet basic expectations.
 
-FOOTNOTE: 1. Firstname Lastname, “Title of Web Page,” Publishing Organization or Name of Website in Italics, publication date and/or access date if available, URL.
-
-REFERENCE: Lastname, Firstname. “Title of Web Page.” Publishing Organization or Name of Website in Italics. Publication date and/or access date if available. URL.
-
-Horrigan, John. A Typology of Information and Communication Technology Users. Pew Internet & American Life Project, May 6, 2007, http://www.pewinternet.org/PPF/r/213/report_display.asp, accessed on May 10, 2007.
 
 [^haymobileweb]: Hay, Stephen, "There is No Mobile Web," *The Haystack*, January 7, 2011, accessed on August 16, 2012, [http://www.the-haystack.com/2011/01/07/there-is-no-mobile-web/](http://www.the-haystack.com/2011/01/07/there-is-no-mobile-web/)
 
-[^Allsopp]: Allsopp, John, "The Dao of Web Design," *A List Apart*, April 7, 2000, accessed August 16, 2012, [http://www.alistapart.com/articles/dao/](http://www.alistapart.com/articles/dao/)
-
-
-[^PewTeens]: Lenhart, Amanda, "Teens, Smartphones & Texting," *Pew Internet & American Life Project*, March 19, 2012, access August 16, 2012, [http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx](http://www.pewinternet.org/Reports/2012/Teens-and-smartphones/Summary-of-findings.aspx)
-
-[^PewCellUse]: Smith, Aaron, "Cell Internet Use 2012," *Pew Internet & American Life Project*, June 26, 2012, accessed August 16, 2012, [http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx](http://www.pewinternet.org/Reports/2012/Cell-Internet-Use-2012.aspx)
-
-[^ALARWD]: Marcotte, Ethan, "Responsive Web Design," *A List Apart*, May 25, 2010, accessed August 16, 2012, [http://www.alistapart.com/articles/responsive-web-design/](http://www.alistapart.com/articles/responsive-web-design/)
-
 [^W3CMediaQueries]: "Media Queries," *W3C*, June 19, 2012, accessed Agust 16, 2012, [http://www.w3.org/TR/css3-mediaqueries/](http://www.w3.org/TR/css3-mediaqueries/)
-
-Marcotte, Ethan. 2011. *Responsive Web Design*. New York: A Book Apart.
-
-Mitchell, Amy, Tom Rosenstiel, and Leah Christian. 2012. "Mobile Devices and News Consumption: Some Good Signs for Journalism." *The State of the News Media 2012*. http://stateofthemedia.org/2012/mobile-devices-and-news-consumption-some-good-signs-for-journalism/
 	
